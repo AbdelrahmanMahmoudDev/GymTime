@@ -26,11 +26,26 @@ namespace GymTime.DataAccess
                 .HasForeignKey<TrainingSchedule>(s => s.CustomerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Customer>()
+                .HasOne(cust => cust.CustomerPassword)
+                .WithOne(CustPass => CustPass.Customer)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<TrainingSchedule>()
                 .HasOne(s => s.Trainer)
                 .WithMany(t => t.Schedules)
                 .HasForeignKey(s => s.TrainerId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Manager>()
+                .HasOne(man => man.ManagerPassword)
+                .WithOne(ManPass => ManPass.Manager)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Trainer>()
+                .HasOne(trainer => trainer.TrainerPassword)
+                .WithOne(TrainerPass => TrainerPass.Trainer)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

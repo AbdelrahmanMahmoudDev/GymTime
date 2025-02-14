@@ -32,6 +32,10 @@
             btn_Register = new Custom_Controls.GymButton();
             pictureBox1 = new PictureBox();
             btn_Login = new Custom_Controls.GymButton();
+            tb_Username = new Custom_Controls.GymTextBox();
+            lbl_Username = new Custom_Controls.GymLabel();
+            lbl_Password = new Custom_Controls.GymLabel();
+            tb_Password = new Custom_Controls.GymTextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -43,12 +47,13 @@
             btn_Register.FlatStyle = FlatStyle.Flat;
             btn_Register.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btn_Register.ForeColor = Color.Black;
-            btn_Register.Location = new Point(900, 607);
+            btn_Register.Location = new Point(895, 490);
             btn_Register.Name = "btn_Register";
             btn_Register.Size = new Size(243, 50);
             btn_Register.TabIndex = 1;
             btn_Register.Text = "Register";
             btn_Register.UseVisualStyleBackColor = false;
+            btn_Register.Click += btn_Register_Click;
             // 
             // pictureBox1
             // 
@@ -70,12 +75,58 @@
             btn_Login.FlatStyle = FlatStyle.Flat;
             btn_Login.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btn_Login.ForeColor = Color.Black;
-            btn_Login.Location = new Point(900, 551);
+            btn_Login.Location = new Point(895, 434);
             btn_Login.Name = "btn_Login";
             btn_Login.Size = new Size(243, 50);
             btn_Login.TabIndex = 3;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = false;
+            // 
+            // tb_Username
+            // 
+            tb_Username.BackColor = Color.FromArgb(30, 30, 30);
+            tb_Username.BorderStyle = BorderStyle.FixedSingle;
+            tb_Username.Font = new Font("Segoe UI", 10F);
+            tb_Username.ForeColor = Color.White;
+            tb_Username.Location = new Point(858, 185);
+            tb_Username.Name = "tb_Username";
+            tb_Username.Size = new Size(311, 30);
+            tb_Username.TabIndex = 4;
+            // 
+            // lbl_Username
+            // 
+            lbl_Username.BackColor = Color.Transparent;
+            lbl_Username.Font = new Font("Segoe UI", 10F);
+            lbl_Username.ForeColor = Color.White;
+            lbl_Username.Location = new Point(858, 153);
+            lbl_Username.Name = "lbl_Username";
+            lbl_Username.Size = new Size(125, 29);
+            lbl_Username.TabIndex = 5;
+            lbl_Username.Text = "Username";
+            // 
+            // lbl_Password
+            // 
+            lbl_Password.BackColor = Color.Transparent;
+            lbl_Password.Font = new Font("Segoe UI", 10F);
+            lbl_Password.ForeColor = Color.White;
+            lbl_Password.Location = new Point(858, 296);
+            lbl_Password.Name = "lbl_Password";
+            lbl_Password.Size = new Size(125, 29);
+            lbl_Password.TabIndex = 7;
+            lbl_Password.Text = "Password";
+            // 
+            // tb_Password
+            // 
+            tb_Password.BackColor = Color.FromArgb(30, 30, 30);
+            tb_Password.BorderStyle = BorderStyle.FixedSingle;
+            tb_Password.Font = new Font("Segoe UI", 10F);
+            tb_Password.ForeColor = Color.White;
+            tb_Password.Location = new Point(858, 328);
+            tb_Password.Name = "tb_Password";
+            tb_Password.ScrollBars = ScrollBars.Both;
+            tb_Password.Size = new Size(311, 30);
+            tb_Password.TabIndex = 6;
+            tb_Password.UseSystemPasswordChar = true;
             // 
             // Form1
             // 
@@ -83,6 +134,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1280, 720);
+            Controls.Add(lbl_Password);
+            Controls.Add(tb_Password);
+            Controls.Add(lbl_Username);
+            Controls.Add(tb_Username);
             Controls.Add(btn_Login);
             Controls.Add(pictureBox1);
             Controls.Add(btn_Register);
@@ -90,6 +145,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -97,5 +153,9 @@
         private Custom_Controls.GymButton btn_Register;
         private PictureBox pictureBox1;
         private Custom_Controls.GymButton btn_Login;
+        private Custom_Controls.GymTextBox tb_Username;
+        private Custom_Controls.GymLabel lbl_Username;
+        private Custom_Controls.GymLabel lbl_Password;
+        private Custom_Controls.GymTextBox tb_Password;
     }
 }

@@ -8,18 +8,14 @@ namespace GymTime.DataAccess
 {
     public class Trainer
     {
-        public Trainer()
-        {
-            Customers = new List<Customer>();
-            Schedules = new List<TrainingSchedule>();
-        }
         public int TrainerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Salary { get; set; }
         public decimal KPI { get; set; }
-        public IList<Customer> Customers { get; set; }
-        public IList<TrainingSchedule> Schedules { get; set; }
+        public IList<Customer> Customers { get; set; } = new List<Customer>();
+        public IList<TrainingSchedule> Schedules { get; set; } = new List<TrainingSchedule>();
         public Manager Manager { get; set; }
+        public TrainerPassword TrainerPassword { get; set; }
     }
 }

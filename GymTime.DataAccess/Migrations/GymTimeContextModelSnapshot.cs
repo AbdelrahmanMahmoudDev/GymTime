@@ -55,11 +55,12 @@ namespace GymTime.DataAccess.Migrations
 
             modelBuilder.Entity("GymTime.DataAccess.CustomerPassword", b =>
                 {
-                    b.Property<int>("CustomerPasswordId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerPasswordId"));
+                    b.Property<string>("CustomerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -69,7 +70,7 @@ namespace GymTime.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerPasswordId");
+                    b.HasKey("CustomerId");
 
                     b.ToTable("CustomerPasswords");
                 });
@@ -98,10 +99,11 @@ namespace GymTime.DataAccess.Migrations
             modelBuilder.Entity("GymTime.DataAccess.ManagerPassword", b =>
                 {
                     b.Property<int>("ManagerPasswordId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ManagerPasswordId"));
+                    b.Property<string>("ManagerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -170,16 +172,17 @@ namespace GymTime.DataAccess.Migrations
             modelBuilder.Entity("GymTime.DataAccess.TrainerPassword", b =>
                 {
                     b.Property<int>("TrainerPasswordId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrainerPasswordId"));
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainerUsername")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -243,6 +246,28 @@ namespace GymTime.DataAccess.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("GymTime.DataAccess.CustomerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Customer", "Customer")
+                        .WithOne("CustomerPassword")
+                        .HasForeignKey("GymTime.DataAccess.CustomerPassword", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.ManagerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Manager", "Manager")
+                        .WithOne("ManagerPassword")
+                        .HasForeignKey("GymTime.DataAccess.ManagerPassword", "ManagerPasswordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Manager");
+                });
+
             modelBuilder.Entity("GymTime.DataAccess.Trainer", b =>
                 {
                     b.HasOne("GymTime.DataAccess.Manager", "Manager")
@@ -252,6 +277,17 @@ namespace GymTime.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.TrainerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Trainer", "Trainer")
+                        .WithOne("TrainerPassword")
+                        .HasForeignKey("GymTime.DataAccess.TrainerPassword", "TrainerPasswordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.TrainingSchedule", b =>
@@ -275,12 +311,18 @@ namespace GymTime.DataAccess.Migrations
 
             modelBuilder.Entity("GymTime.DataAccess.Customer", b =>
                 {
+                    b.Navigation("CustomerPassword")
+                        .IsRequired();
+
                     b.Navigation("Schedule")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.Manager", b =>
                 {
+                    b.Navigation("ManagerPassword")
+                        .IsRequired();
+
                     b.Navigation("Trainers");
                 });
 
@@ -294,6 +336,9 @@ namespace GymTime.DataAccess.Migrations
                     b.Navigation("Customers");
 
                     b.Navigation("Schedules");
+
+                    b.Navigation("TrainerPassword")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

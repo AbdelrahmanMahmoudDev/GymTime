@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTime.DataAccess.Migrations
 {
     [DbContext(typeof(GymTimeContext))]
-    [Migration("20250213114826_AddTrainerToSchedule")]
-    partial class AddTrainerToSchedule
+    [Migration("20250214233904_initial_migration")]
+    partial class initial_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,28 @@ namespace GymTime.DataAccess.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("GymTime.DataAccess.CustomerPassword", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("CustomerPasswords");
+                });
+
             modelBuilder.Entity("GymTime.DataAccess.Manager", b =>
                 {
                     b.Property<int>("ManagerId")
@@ -75,6 +97,28 @@ namespace GymTime.DataAccess.Migrations
                     b.HasKey("ManagerId");
 
                     b.ToTable("Managers");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.ManagerPassword", b =>
+                {
+                    b.Property<int>("ManagerPasswordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ManagerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ManagerPasswordId");
+
+                    b.ToTable("ManagerPasswords");
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.SubscriptionPackage", b =>
@@ -126,6 +170,28 @@ namespace GymTime.DataAccess.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("Trainers");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.TrainerPassword", b =>
+                {
+                    b.Property<int>("TrainerPasswordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TrainerPasswordId");
+
+                    b.ToTable("TrainerPasswords");
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.TrainingSchedule", b =>
@@ -183,6 +249,28 @@ namespace GymTime.DataAccess.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("GymTime.DataAccess.CustomerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Customer", "Customer")
+                        .WithOne("CustomerPassword")
+                        .HasForeignKey("GymTime.DataAccess.CustomerPassword", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.ManagerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Manager", "Manager")
+                        .WithOne("ManagerPassword")
+                        .HasForeignKey("GymTime.DataAccess.ManagerPassword", "ManagerPasswordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Manager");
+                });
+
             modelBuilder.Entity("GymTime.DataAccess.Trainer", b =>
                 {
                     b.HasOne("GymTime.DataAccess.Manager", "Manager")
@@ -192,6 +280,17 @@ namespace GymTime.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("GymTime.DataAccess.TrainerPassword", b =>
+                {
+                    b.HasOne("GymTime.DataAccess.Trainer", "Trainer")
+                        .WithOne("TrainerPassword")
+                        .HasForeignKey("GymTime.DataAccess.TrainerPassword", "TrainerPasswordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.TrainingSchedule", b =>
@@ -215,12 +314,18 @@ namespace GymTime.DataAccess.Migrations
 
             modelBuilder.Entity("GymTime.DataAccess.Customer", b =>
                 {
+                    b.Navigation("CustomerPassword")
+                        .IsRequired();
+
                     b.Navigation("Schedule")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("GymTime.DataAccess.Manager", b =>
                 {
+                    b.Navigation("ManagerPassword")
+                        .IsRequired();
+
                     b.Navigation("Trainers");
                 });
 
@@ -234,6 +339,9 @@ namespace GymTime.DataAccess.Migrations
                     b.Navigation("Customers");
 
                     b.Navigation("Schedules");
+
+                    b.Navigation("TrainerPassword")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

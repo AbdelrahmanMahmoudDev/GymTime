@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymTime.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTrainerToSchedule : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,26 @@ namespace GymTime.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubscriptionPackages", x => x.SubscriptionPackageId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ManagerPasswords",
+                columns: table => new
+                {
+                    ManagerPasswordId = table.Column<int>(type: "int", nullable: false),
+                    ManagerUsername = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ManagerPasswords", x => x.ManagerPasswordId);
+                    table.ForeignKey(
+                        name: "FK_ManagerPasswords_Managers_ManagerPasswordId",
+                        column: x => x.ManagerPasswordId,
+                        principalTable: "Managers",
+                        principalColumn: "ManagerId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,6 +107,46 @@ namespace GymTime.DataAccess.Migrations
                         column: x => x.TrainerId,
                         principalTable: "Trainers",
                         principalColumn: "TrainerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrainerPasswords",
+                columns: table => new
+                {
+                    TrainerPasswordId = table.Column<int>(type: "int", nullable: false),
+                    TrainerUsername = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrainerPasswords", x => x.TrainerPasswordId);
+                    table.ForeignKey(
+                        name: "FK_TrainerPasswords_Trainers_TrainerPasswordId",
+                        column: x => x.TrainerPasswordId,
+                        principalTable: "Trainers",
+                        principalColumn: "TrainerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerPasswords",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CustomerUsername = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerPasswords", x => x.CustomerId);
+                    table.ForeignKey(
+                        name: "FK_CustomerPasswords_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -148,6 +208,15 @@ namespace GymTime.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CustomerPasswords");
+
+            migrationBuilder.DropTable(
+                name: "ManagerPasswords");
+
+            migrationBuilder.DropTable(
+                name: "TrainerPasswords");
+
             migrationBuilder.DropTable(
                 name: "TrainingSchedules");
 

@@ -80,7 +80,14 @@ namespace GymTime.Presentation
 
         private void InitializeComponent()
         {
-
+            SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            ClientSize = new Size(1262, 673);
+            Name = "BaseForm";
+            StartPosition = FormStartPosition.CenterParent;
+            ResumeLayout(false);
         }
 
         private Button CreateTitleBarButton(string text, Color bgColor)

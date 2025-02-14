@@ -7,5 +7,11 @@ namespace GymTime.Presentation
         {
             InitializeComponent();
         }
+
+        private void btn_Register_Click(object sender, EventArgs e)
+        {
+            var Reg = new RegisterScreen();
+            Reg.ShowDialog();
+        }
     }
 }

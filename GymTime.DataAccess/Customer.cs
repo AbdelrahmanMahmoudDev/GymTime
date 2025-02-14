@@ -15,5 +15,6 @@ namespace GymTime.DataAccess
         public Trainer Trainer { get; set; }
         public SubscriptionPackage SubPack { get; set; }
         public TrainingSchedule Schedule { get; set; }
+        public CustomerPassword CustomerPassword { get; set; }
     }
 }
