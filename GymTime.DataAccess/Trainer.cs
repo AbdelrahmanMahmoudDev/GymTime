@@ -15,6 +15,7 @@ namespace GymTime.DataAccess
         public decimal KPI { get; set; }
         public IList<Customer> Customers { get; set; } = new List<Customer>();
         public IList<TrainingSchedule> Schedules { get; set; } = new List<TrainingSchedule>();
+        public int? ManagerId { get; set; }
         public Manager Manager { get; set; }
         public TrainerPassword TrainerPassword { get; set; }
     }

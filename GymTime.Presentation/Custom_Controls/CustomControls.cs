@@ -82,4 +82,15 @@ namespace GymTime.Presentation.Custom_Controls
 
         }
     }
+
+    [ToolboxItem(true)]
+    public class GymNumericUpDown : NumericUpDown
+    {
+        public GymNumericUpDown()
+        {
+            this.BackColor = Color.FromArgb(30, 30, 30); // Dark background
+            this.ForeColor = Color.White;
+            this.Font = new Font("Segoe UI", 10);
+        }
+    }
 }
