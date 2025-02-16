@@ -19,7 +19,10 @@ namespace GymTime.Presentation
 
         private void btn_PreManager_Click(object sender, EventArgs e)
         {
-
+            var reg = new ManagerRegistration();
+            reg.FormClosing += delegate { this.Show(); };
+            reg.Show();
+            this.Hide();
         }
 
         private void btn_PreTrainer_Click(object sender, EventArgs e)
