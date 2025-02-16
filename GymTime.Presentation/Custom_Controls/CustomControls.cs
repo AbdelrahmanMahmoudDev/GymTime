@@ -28,7 +28,7 @@ namespace GymTime.Presentation.Custom_Controls
     }
 
     [ToolboxItem(true)]
-    public class GymTextBox : TextBox 
+    public class GymTextBox : TextBox
     {
         public GymTextBox()
         {
@@ -69,6 +69,17 @@ namespace GymTime.Presentation.Custom_Controls
             this.BackColor = Color.FromArgb(30, 30, 30); // Dark background
             this.ForeColor = Color.White;
             this.Font = new Font("Segoe UI", 10);
+        }
+    }
+    [ToolboxItem(true)]
+    public class GymComboBox : ComboBox
+    {
+        public GymComboBox()
+        {
+            this.BackColor = Color.FromArgb(30, 30, 30); // Dark background
+            this.ForeColor = Color.White;
+            this.Font = new Font("Segoe UI", 10);
+
         }
     }
 }

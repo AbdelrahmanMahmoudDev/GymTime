@@ -16,5 +16,22 @@ namespace GymTime.Presentation
         {
             InitializeComponent();
         }
+
+        private void btn_PreManager_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_PreTrainer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_PreCustomer_Click(object sender, EventArgs e)
+        {
+            var CustRegScreen = new CustomerRegistration();
+            CustRegScreen.Show();
+            this.Close();
+        }
     }
 }

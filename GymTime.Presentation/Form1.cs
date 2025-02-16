@@ -10,8 +10,13 @@ namespace GymTime.Presentation
 
         private void btn_Register_Click(object sender, EventArgs e)
         {
-            var Reg = new RegisterScreen();
-            Reg.ShowDialog();
+            Program.RegScreen.Show();
+            this.Hide();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

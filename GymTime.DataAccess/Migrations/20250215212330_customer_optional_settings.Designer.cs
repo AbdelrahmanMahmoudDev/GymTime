@@ -4,6 +4,7 @@ using GymTime.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTime.DataAccess.Migrations
 {
     [DbContext(typeof(GymTimeContext))]
-    partial class GymTimeContextModelSnapshot : ModelSnapshot
+    [Migration("20250215212330_customer_optional_settings")]
+    partial class customer_optional_settings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace GymTime.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<int?>("CustomerPasswordId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -41,18 +41,15 @@ namespace GymTime.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubscriptionPackageId")
+                    b.Property<int?>("SubPackSubscriptionPackageId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TrainerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TrainingScheduleId")
-                        .HasColumnType("int");
-
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("SubscriptionPackageId");
+                    b.HasIndex("SubPackSubscriptionPackageId");
 
                     b.HasIndex("TrainerId");
 
@@ -237,7 +234,7 @@ namespace GymTime.DataAccess.Migrations
                 {
                     b.HasOne("GymTime.DataAccess.SubscriptionPackage", "SubPack")
                         .WithMany("Customers")
-                        .HasForeignKey("SubscriptionPackageId");
+                        .HasForeignKey("SubPackSubscriptionPackageId");
 
                     b.HasOne("GymTime.DataAccess.Trainer", "Trainer")
                         .WithMany("Customers")

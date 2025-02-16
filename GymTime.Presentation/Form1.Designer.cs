@@ -143,6 +143,7 @@
             Controls.Add(btn_Register);
             Name = "Form1";
             Text = "Form1";
+            FormClosed += Form1_FormClosed;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

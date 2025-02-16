@@ -45,13 +45,13 @@ namespace GymTime.Presentation
             };
             titleBar.Controls.Add(title);
 
-            Button btnClose = CreateTitleBarButton("X", Color.FromArgb(200, 50, 50));
+            Button btnClose = CreateTitleBarButton("X", Color.FromArgb(30, 50, 50));
             btnClose.Click += (s, e) => this.Close();
 
-            Button btnMinimize = CreateTitleBarButton("_", Color.FromArgb(50, 200, 50));
+            Button btnMinimize = CreateTitleBarButton("_", Color.FromArgb(30, 50, 50));
             btnMinimize.Click += (s, e) => this.WindowState = FormWindowState.Minimized;
 
-            Button btnMaximize = CreateTitleBarButton("🗖", Color.FromArgb(50, 100, 200));
+            Button btnMaximize = CreateTitleBarButton("🗖", Color.FromArgb(30, 50, 50));
             btnMaximize.Click += (s, e) =>
             {
                 this.WindowState = this.WindowState == FormWindowState.Maximized ?

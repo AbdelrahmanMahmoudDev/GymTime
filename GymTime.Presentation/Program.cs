@@ -3,6 +3,13 @@ namespace GymTime.Presentation
 {
     internal static class Program
     {
+        public static Form1 StartingScreen = new Form1();
+        public static RegisterScreen RegScreen = new RegisterScreen();
+        public static CustomerRegistration CustRegScreen = new CustomerRegistration();
+        static void LoadScreens()
+        {
+
+        }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -13,7 +20,7 @@ namespace GymTime.Presentation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new Form1());
+            Application.Run(StartingScreen);
         }
     }
 }
