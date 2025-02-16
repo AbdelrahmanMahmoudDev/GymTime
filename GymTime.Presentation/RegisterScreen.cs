@@ -29,9 +29,10 @@ namespace GymTime.Presentation
 
         private void btn_PreCustomer_Click(object sender, EventArgs e)
         {
-            var CustRegScreen = new CustomerRegistration();
-            CustRegScreen.Show();
-            this.Close();
+            var reg = new CustomerRegistration();
+            reg.FormClosing += delegate { this.Show(); };
+            reg.Show();
+            this.Hide();
         }
     }
 }

@@ -254,8 +254,6 @@
             Controls.Add(tb_FirstName);
             Name = "CustomerRegistration";
             Text = "CustomerRegistration";
-            FormClosed += CustomerRegistration_FormClosed;
-            Load += CustomerRegistration_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

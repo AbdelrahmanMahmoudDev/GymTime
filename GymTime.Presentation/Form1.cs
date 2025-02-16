@@ -10,7 +10,9 @@ namespace GymTime.Presentation
 
         private void btn_Register_Click(object sender, EventArgs e)
         {
-            Program.RegScreen.Show();
+            var reg = new RegisterScreen();
+            reg.FormClosing += delegate { this.Show(); };
+            reg.Show();
             this.Hide();
         }
 

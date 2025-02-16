@@ -33,17 +33,6 @@ namespace GymTime.Presentation
 
         }
 
-        private void CustomerRegistration_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CustomerRegistration_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.StartingScreen.Show();
-            this.Hide();
-        }
-
         private async void btn_CustReg_Click(object sender, EventArgs e)
         {
             // prep data
