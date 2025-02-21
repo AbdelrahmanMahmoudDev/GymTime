@@ -23,7 +23,7 @@ namespace GymTime.Presentation.Custom_Controls
 
             // Hover effect
             this.MouseEnter += (s, e) => this.BackColor = Color.FromArgb(100, 100, 100);
-            this.MouseLeave += (s, e) => this.BackColor = Color.FromArgb(50, 50, 50);
+            this.MouseLeave += (s, e) => this.BackColor = Color.Silver;
         }
     }
 
